@@ -4,36 +4,36 @@ import { step } from '../../misc/reporters/step'
 
 export class MainPage extends AppPage {
     public pagePath = '/'
-    readonly page: Page
-    readonly featuredArticleTitle: Locator
-    readonly featuredArticleContent: Locator
-    readonly inTheNewsTitle: Locator
-    readonly inTheNewsContent: Locator
-    readonly didYouKnowTitle: Locator
-    readonly didYouKnowContent: Locator
-    readonly featuredPictureTitle: Locator
-    readonly featuredPictureContent: Locator
-    readonly onThisDayTitle: Locator
-    readonly onThisDayContent: Locator
-    readonly noArticleText: Locator
-    readonly mediaWikiLink: Locator
+    //readonly page: Page
+    readonly featuredArticleTitle: Locator = this.page.locator('.MainPageBG #mp-tfa-h2')
+    readonly featuredArticleContent: Locator = this.page.locator('.MainPageBG #mp-tfa')
+    readonly inTheNewsTitle: Locator = this.page.locator('#In_the_news')
+    readonly inTheNewsContent: Locator = this.page.locator('#mp-itn')
+    readonly didYouKnowTitle: Locator = this.page.locator('#mp-dyk-h2')
+    readonly didYouKnowContent: Locator = this.page.locator('#mp-dyk')
+    readonly featuredPictureTitle: Locator = this.page.locator('#mp-tfp-h2')
+    readonly featuredPictureContent: Locator = this.page.locator('#mp-tfp')
+    readonly onThisDayTitle: Locator = this.page.locator('#On_this_day')
+    readonly onThisDayContent: Locator = this.page.locator('#mp-right #mp-otd')
+    readonly noArticleText: Locator = this.page.locator('#noarticletext')
+    readonly mediaWikiLink: Locator = this.page.locator('[title="mw:"]')
 
-    constructor(page: Page) {
-        super(page)
-        this.page = page
-        this.featuredArticleTitle = page.locator('.MainPageBG #mp-tfa-h2')
-        this.featuredArticleContent = page.locator('.MainPageBG #mp-tfa')
-        this.inTheNewsTitle = page.locator('#In_the_news')
-        this.inTheNewsContent = page.locator('#mp-itn')
-        this.didYouKnowTitle = page.locator('#mp-dyk-h2')
-        this.didYouKnowContent = page.locator('#mp-dyk')
-        this.featuredPictureTitle = page.locator('#mp-tfp-h2')
-        this.featuredPictureContent = page.locator('#mp-tfp')
-        this.onThisDayTitle = page.locator('#On_this_day')
-        this.onThisDayContent = page.locator('#mp-right #mp-otd')
-        this.noArticleText = page.locator('#noarticletext')
-        this.mediaWikiLink = page.locator('[title="mw:"]')
-    }
+    // constructor(page: Page) {
+    //     super(page)
+    //     this.page = page
+    //     this.featuredArticleTitle = page.locator('.MainPageBG #mp-tfa-h2')
+    //     this.featuredArticleContent = page.locator('.MainPageBG #mp-tfa')
+    //     this.inTheNewsTitle = page.locator('#In_the_news')
+    //     this.inTheNewsContent = page.locator('#mp-itn')
+    //     this.didYouKnowTitle = page.locator('#mp-dyk-h2')
+    //     this.didYouKnowContent = page.locator('#mp-dyk')
+    //     this.featuredPictureTitle = page.locator('#mp-tfp-h2')
+    //     this.featuredPictureContent = page.locator('#mp-tfp')
+    //     this.onThisDayTitle = page.locator('#On_this_day')
+    //     this.onThisDayContent = page.locator('#mp-right #mp-otd')
+    //     this.noArticleText = page.locator('#noarticletext')
+    //     this.mediaWikiLink = page.locator('[title="mw:"]')
+    // }
 
     public async expectLoaded(message = 'Expected Main page to be loaded'): Promise<void> {
         await expect(this.featuredArticleTitle, message).toBeVisible()
