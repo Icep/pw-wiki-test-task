@@ -4,7 +4,6 @@ import { step } from '../../misc/reporters/step'
 
 export class SearchResultPage extends AppPage {
     public pagePath = '/w/index.php?search'
-    //readonly page: Page
     readonly contentContainer: Locator = this.page.locator('.mw-content-container')
     readonly title: Locator = this.contentContainer.locator('#firstHeading')
     readonly noResultsMessage: Locator = this.contentContainer.locator('.mw-search-nonefound')
@@ -15,21 +14,6 @@ export class SearchResultPage extends AppPage {
     readonly searchResultsItemTitle: Locator = this.contentContainer.locator('.mw-search-result-heading')
     readonly searchResultsItemBody: Locator = this.contentContainer.locator('.searchresult')
     readonly noneFoundResults: Locator = this.contentContainer.locator('.mw-search-nonefound')
-
-    // constructor(page: Page) {
-    //     super(page)
-    //     this.page = page
-    //     this.contentContainer = page.locator('.mw-content-container')
-    //     this.title = this.contentContainer.locator('#firstHeading')
-    //     this.noResultsMessage = this.contentContainer.locator('.mw-search-nonefound')
-    //     this.searchInput = this.contentContainer.locator('#searchText')
-    //     this.searchButton = this.contentContainer.locator('[type="submit"]')
-    //     this.searchResultsContainer = this.contentContainer.locator('.mw-search-results')
-    //     this.searchResultsItem = this.contentContainer.locator('.mw-search-result')
-    //     this.searchResultsItemTitle = this.searchResultsItem.locator('.mw-search-result-heading')
-    //     this.searchResultsItemBody = this.searchResultsItem.locator('.searchresult')
-    //     this.noneFoundResults = this.contentContainer.locator('.mw-search-nonefound')
-    // }
 
     @step()
     public async expectLoaded(message = 'Expected Search results page to be loaded'): Promise<void> {

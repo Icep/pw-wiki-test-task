@@ -3,7 +3,6 @@ import { AppPage } from '../abstractClasses'
 
 export class ArticlePage extends AppPage {
     public pagePath = '/wiki/'
-    //readonly page: Page
     readonly title: Locator = this.page.locator('#firstHeading')
     readonly content: Locator = this.page.locator('#mw-content-text .mw-parser-output')
     readonly references: Locator = this.page.locator('#References')
@@ -11,18 +10,6 @@ export class ArticlePage extends AppPage {
     readonly categories: Locator = this.page.locator('#mw-normal-catlinks ul li')
     readonly externalLinks: Locator = this.page.locator('span#External_links ~ ul li')
     readonly seeAlsoSections: Locator = this.page.locator('span#See_also ~ ul li')
-
-    // constructor(page: Page) {
-    //     super(page)
-    //     this.page = page
-    //     this.title = page.locator('#firstHeading')
-    //     this.content = page.locator('#mw-content-text .mw-parser-output')
-    //     this.references = page.locator('#References')
-    //     this.infoBox = page.locator('.infobox')
-    //     this.categories = page.locator('#mw-normal-catlinks ul li')
-    //     this.externalLinks = page.locator('span#External_links ~ ul li')
-    //     this.seeAlsoSections = page.locator('span#See_also ~ ul li')
-    // }
 
     async open(url: string): Promise<void> {
         await this.page.goto(url)

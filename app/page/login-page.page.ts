@@ -3,24 +3,12 @@ import { AppPage } from '../abstractClasses'
 
 export class LoginPage extends AppPage {
     public pagePath = '/w/index.php?search'
-    //readonly page: Page
     readonly userLoginForm: Locator = this.page.locator('#userloginForm')
     readonly usernameInput: Locator = this.userLoginForm.locator('#wpName1')
     readonly passwordInput: Locator = this.userLoginForm.locator('#wpPassword1')
     readonly loginButton: Locator = this.userLoginForm.locator('#wpLoginAttempt')
     readonly loginErrorMessage: Locator = this.userLoginForm.locator('.cdx-message--error')
     readonly loginSuccessMessage: Locator = this.userLoginForm.locator('.cdx-message--success') //need to update locator after account creation
-
-        // constructor(page: Page) {
-        //     super(page)
-        //     this.page = page
-        //     this.userLoginForm = page.locator('#userloginForm')
-        //     this.usernameInput = this.userLoginForm.locator('#wpName1')
-        //     this.passwordInput = this.userLoginForm.locator('#wpPassword1')
-        //     this.loginButton = this.userLoginForm.locator('#wpLoginAttempt')
-        //     this.loginErrorMessage = this.userLoginForm.locator('.cdx-message--error')
-        //     this.loginSuccessMessage = this.userLoginForm.locator('.cdx-message--success') //need to update locator after account creation
-        // }
 
     public async expectLoaded(message = 'Expected Login page to be loaded'): Promise<void> {
         await expect(this.userLoginForm, message).toBeVisible()

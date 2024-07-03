@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 import { Application } from '../../app'
-
+import { step } from '../../misc/reporters/step'
 export class LoginSteps {
     readonly page: Page
     readonly app: Application
@@ -10,6 +10,7 @@ export class LoginSteps {
         this.app = app
     }
     
+    @step()
     public async login(username: string, password: string): Promise<void> {
         await this.app.loginPage.fillUsernameField(username)
         await this.app.loginPage.fillPasswordField(password)
