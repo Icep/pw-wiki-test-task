@@ -2,19 +2,19 @@ import { expect, Locator, Page } from '@playwright/test'
 import { AppPage } from '../abstractClasses'
 
 export class LoginPage extends AppPage {
-    public pagePath = '/w/index.php?search'
-    readonly userLoginForm: Locator = this.page.locator('#userloginForm')
-    readonly usernameInput: Locator = this.userLoginForm.locator('#wpName1')
-    readonly passwordInput: Locator = this.userLoginForm.locator('#wpPassword1')
-    readonly loginButton: Locator = this.userLoginForm.locator('#wpLoginAttempt')
-    readonly loginErrorMessage: Locator = this.userLoginForm.locator('.cdx-message--error')
+    public pagePath = '/Cars/authentication/renderRegisterLoginForm.action?redirectUrl=%2F'
+    readonly userLoginForm: Locator = this.page.locator('.panelBody')
+    readonly usernameInput: Locator = this.userLoginForm.locator('#registerEmail')
+    readonly nextButton: Locator = this.userLoginForm.locator(`[data-cg-ft='login-next-button']`)
+    readonly passwordInput: Locator = this.userLoginForm.locator('#loginPassword')
+    readonly loginButton: Locator = this.userLoginForm.locator(`[data-cg-ft='login-sign-in-button']`)
+    readonly loginErrorMessage: Locator = this.userLoginForm.locator('#errorMessageBox')
     readonly loginSuccessMessage: Locator = this.userLoginForm.locator('.cdx-message--success') //need to update locator after account creation
 
     public async expectLoaded(message = 'Expected Login page to be loaded'): Promise<void> {
         await expect(this.userLoginForm, message).toBeVisible()
         await expect(this.usernameInput, message).toBeVisible()
-        await expect(this.passwordInput, message).toBeVisible()
-        await expect(this.loginButton, message).toBeVisible()
+        await expect(this.nextButton, message).toBeVisible()
     }
 
     public async open(url: string): Promise<void> {
@@ -31,14 +31,12 @@ export class LoginPage extends AppPage {
         await this.passwordInput.fill(password)
     }
 
-    public async clickLoginButton(): Promise<void> {
-        await this.loginButton.click()
+    public async clickNextButton(): Promise<void> {
+        await this.nextButton.click()
     }
 
-    public async login(username: string, password: string): Promise<void> {
-        await this.fillUsernameField(username)
-        await this.fillPasswordField(password)
-        await this.clickLoginButton()
+    public async clickLoginButton(): Promise<void> {
+        await this.loginButton.click()
     }
 
     public async expectErrorMessageToBeVisible(): Promise<void> {

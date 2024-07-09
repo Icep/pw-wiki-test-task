@@ -5,7 +5,7 @@ let app: Application
 
 test.beforeEach(async ({ page }) => {
     app = new Application(page)
-    await app.mainPage.open('https://en.wikipedia.org/wiki/Main_Page')
+    await app.mainPage.open('https://www.cargurus.com/')
 })
 
 test.describe('Login', () => {

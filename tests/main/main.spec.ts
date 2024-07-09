@@ -5,57 +5,46 @@ let app: Application
 
 test.beforeEach(async ({ page }) => {
     app = new Application(page)
-    await app.mainPage.open('https://en.wikipedia.org/wiki/Main_Page')
+    await app.mainPage.open('https://www.cargurus.com/')
 })
 
-test.describe('Main Menu Functionality', () => {
-    test('Navigate to "Contents" section', async ({ page }) => {
-        // Click on the "Contents" link in the main menu
-        await app.mainMenu.navigateToMainMenuItem('Contents')
-        // Verify that the user is taken to the "Contents" section
-        await expect(page.url()).toContain('/wiki/Wikipedia:Contents')
+test.describe('Navigation bar functionality', () => {
+    test('Navigate to "Buy" section', async ({ page }) => {
+        // Click on the "Buy" link in the navbar
+        await app.navbar.openBuySection()
+        // Verify that the user is taken to the "Buy" section
+        await expect(page.url()).toContain('/Cars/forsale')
     })
 
-    test('Verify navigation to "Random article"', async ({ page }) => {
-        // Click on the "Random article" link in the main menu
-        await app.mainMenu.navigateToMainMenuItem('Random article')
-        // Verify that the user is taken to a random article
-        await app.articlePage.checkArticleElementsVisibility()
+    test('Verify navigation to "Sell" section', async ({ page }) => {
+        // Click on the "Sell" link in the navbar
+        await app.navbar.openSellSection()
+        // Verify that the user is taken to the "Sell" section
+        await expect(page.url()).toContain('/sell-car/?pid=SellMyCarDesktopHeader')
+    })
+
+    test('Navigate to "Finance" section', async ({ page }) => {
+        // Click on the "Current events" link in the main menu
+        await app.navbar.openFinanceSection()
+        // Verify that the user is taken to the "Current events" section
+        await expect(page.url()).toContain('/Cars/finance')
+    })
+
+    test('Navigate to "Research" section', async ({ page }) => {
+        // Click on the "Research" link in the navbar
+        await app.navbar.openResearchSection()
+        // Verify that the user is taken to the "Research" section
+        await expect(page.url()).toContain('/research')
     })
 
     test('Verify navigation with an invalid URL', async ({ page }) => {
         // Modify the URL in the browser's address bar to an invalid Wikipedia URL
-        await app.mainPage.open('https://en.wikipedia.org/wiki/Invalid_UR_L')
+        await app.mainPage.open('https://www.cargurus.com/Cars/new/searchresults.a?entitySelectgHelper.selectedEntity=d21&zip=65080#listing=387258231/NEWCAR_FEATURED/DEFAULT')
         // Verify that a 404 error page or a similar error message is displayed
-        await app.mainPage.checkNoArticleTextIsVisible()
+        await app.mainPage.check404PageIsVisible()
     })
 })
 
-test.describe('Search System', () => {
-    test('Search for an existing term', async ({ page }) => {
-        // Enter "Quantum mechanics" in the search field and click Search button
-        await app.navbar.searchForAllPagesContaining('Quantum')
-        // Verify that a search page with results matching the query is displayed
-        await app.searchResultPage.checkSearchResultsElementsVisibility()
-        await app.searchResultPage.checkSearchResultsTextContentNotEmpty()
-        await app.searchResultPage.checkSearchResultsContainText('Quantum')
-    })
-
-    test('Search with autocomplete', async ({ page }) => {
-        // Type "Quan" in the search field
-        await app.navbar.fillSearchField('Quan')
-        // Verify that suggestions with autocomplete, including "Quantum mechanics", appear in a dropdown menu
-        await app.navbar.expectSearchResultsModalVisible()
-        await app.navbar.expectSearchResultsItemVisible('Quantum mechanics')
-    })
-
-    test('Search for a non-existent term', async ({ page }) => {
-        // Enter a string of random characters in the search field and press Enter
-        await app.navbar.search('Random123sdfg')
-        // Verify that the search results page indicates that no results were found
-        await expect(app.searchResultPage.noneFoundResults).toHaveText('There were no results matching the query.')
-    })
-})
 
 test.describe('Login', () => {
     //For this test we need to have a valid username and password but unfortunately we don't have it
@@ -64,7 +53,7 @@ test.describe('Login', () => {
         // Click on "Log in"
         await app.navbar.clickLoginLink()
         // Enter a correct username and password and press the login button
-        await app.loginPage.login('username', 'Test@password123')
+        await app.loginSteps.login('username', 'Test@password123')
         // Verify that the user successfully logs into the system and a welcome message is displayed
         await app.loginPage.expectSuccessMessageToBeVisible()
         await app.loginPage.expectSuccessMessageTextToBe('You are now logged in.')
@@ -74,7 +63,7 @@ test.describe('Login', () => {
         // Click on "Log in"
         await app.navbar.clickLoginLink()
         // Enter an incorrect username and password and attempt to log in
-        await app.loginPage.login('incorrect_username', 'incorrect_password')
+        await app.loginSteps.login('incorrect_username', 'incorrect_password')
         // Verify that an error message appears and the login is not completed
         await app.loginPage.expectErrorMessageToBeVisible()
         await app.loginPage.expectErrorMessageTextToBe('Incorrect username or password entered. Please try again.')

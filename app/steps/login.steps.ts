@@ -13,6 +13,8 @@ export class LoginSteps {
     @step()
     public async login(username: string, password: string): Promise<void> {
         await this.app.loginPage.fillUsernameField(username)
+        await this.app.loginPage.clickNextButton()
+        
         await this.app.loginPage.fillPasswordField(password)
         await this.app.loginPage.clickLoginButton()
     }
