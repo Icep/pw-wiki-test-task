@@ -5,15 +5,15 @@ let app: Application
 
 test.beforeEach(async ({ page }) => {
     app = new Application(page)
-    await app.mainPage.open('https://www.cargurus.com/')
+    await app.mainPage.open('https://proxinator-na.svc.ue1.site-dev.c-gurus.com/')
 })
 
 test.describe('Login', () => {
-    test.skip('Successful login', async ({ page }) => {
+    test('Successful login', async ({ page }) => {
         // Click on "Log in"
         await app.navbar.clickLoginLink()
-        // Enter a correct username and password and press the login button
-        await app.loginSteps.login('username', 'Test@password123')
+        // Enter a correct username and password and press the login button Saved cars & searches GuruDTQB24
+        await app.loginSteps.login('cgautotest@mailforspam.com', 'Cgtestpass1!')
         // Verify that the user successfully logs into the system and a welcome message is displayed
         await app.loginPage.expectSuccessMessageToBeVisible()
         await app.loginPage.expectSuccessMessageTextToBe('You are now logged in.')
